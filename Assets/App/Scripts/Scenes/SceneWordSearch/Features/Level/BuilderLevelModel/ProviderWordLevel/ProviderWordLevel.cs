@@ -17,6 +17,8 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
             else
             {
                 return null;
+
+                //throw new System.Exception();
             }
         }
     }

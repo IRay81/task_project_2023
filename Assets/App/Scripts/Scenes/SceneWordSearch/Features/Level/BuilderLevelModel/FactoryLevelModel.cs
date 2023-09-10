@@ -21,7 +21,25 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
 
         private List<char> BuildListChars(List<string> words)
         {
-            Dictionary<char, int>  lettersCount = new Dictionary<char, int>();
+            if (words != null)
+            {
+                Dictionary<char, int> letterCount = GetLetterCount(words);
+
+                List<char> listChars = GetListFromLetterCount(letterCount);
+
+                return listChars;
+            }
+            else
+            {
+                return null;
+
+                //throw new Exception();
+            }
+        }
+
+        private Dictionary<char, int> GetLetterCount(List<string> words)
+        {
+            Dictionary<char, int> letterCount = new Dictionary<char, int>();
 
             foreach (var word in words)
             {
@@ -37,23 +55,28 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
                         }
                     }
 
-                    if (lettersCount.TryGetValue(word[i], out int lastCount))
+                    if (letterCount.TryGetValue(word[i], out int lastCount))
                     {
                         if (lastCount < count)
                         {
-                            lettersCount[word[i]] = count;
+                            letterCount[word[i]] = count;
                         }
                     }
                     else
                     {
-                        lettersCount.Add(word[i], count);
+                        letterCount.Add(word[i], count);
                     }
                 }
             }
 
-            List<char> listChars = new List<char>();
+            return letterCount;
+        }
 
-            foreach (KeyValuePair<char, int> keyValuePair in lettersCount)
+        private List<char> GetListFromLetterCount(Dictionary<char, int> letterCount)
+        {
+            List<char> listChars = new();
+
+            foreach (KeyValuePair<char, int> keyValuePair in letterCount)
             {
                 for (int i = 0; i < keyValuePair.Value; i++)
                 {
