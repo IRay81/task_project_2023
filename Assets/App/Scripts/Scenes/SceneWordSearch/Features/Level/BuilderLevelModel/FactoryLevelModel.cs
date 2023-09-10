@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using App.Scripts.Libs.Factory;
 using App.Scripts.Scenes.SceneWordSearch.Features.Level.Models.Level;
@@ -37,6 +36,11 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
             }
         }
 
+        /// <summary>
+        /// Считает максимальное количество каждой буквы во всех словах.
+        /// </summary>
+        /// <param name="words">Список слов.</param>
+        /// <returns>Словарь, где ключ - буква, а значение - максимальное количество из всех слов в всписке.</returns>
         private Dictionary<char, int> GetLetterCount(List<string> words)
         {
             Dictionary<char, int> letterCount = new Dictionary<char, int>();
@@ -72,6 +76,11 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel
             return letterCount;
         }
 
+        /// <summary>
+        /// Создаёт из словаря список букв.
+        /// </summary>
+        /// <param name="letterCount">Словарь, где ключ - буква, а значение - максимальное количество из всех слов в всписке.</param>
+        /// <returns>Список букв.</returns>
         private List<char> GetListFromLetterCount(Dictionary<char, int> letterCount)
         {
             List<char> listChars = new();
