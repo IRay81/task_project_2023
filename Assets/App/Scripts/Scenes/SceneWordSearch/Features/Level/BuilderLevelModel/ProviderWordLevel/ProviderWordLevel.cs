@@ -1,4 +1,4 @@
-using System;
+using UnityEngine;
 using App.Scripts.Scenes.SceneWordSearch.Features.Level.Models.Level;
 
 namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.ProviderWordLevel
@@ -7,8 +7,17 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
     {
         public LevelInfo LoadLevelData(int levelIndex)
         {
-            //напиши реализацию не меняя сигнатуру функции
-            throw new NotImplementedException();
+            TextAsset jsonLevelFile = Resources.Load<TextAsset>($"WordSearch/Levels/{levelIndex}");
+
+            if (jsonLevelFile)
+            {
+                return JsonUtility.FromJson<LevelInfo>(jsonLevelFile.text);
+
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
