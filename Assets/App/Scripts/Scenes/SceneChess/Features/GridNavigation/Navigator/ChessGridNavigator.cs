@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.GridMatrix;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.Types;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
 {
@@ -121,7 +123,7 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
         }
 
         /// <summary>
-        /// Возможные позиции фигуры на следующий ход.
+        /// Метод нахождения возможных позиций фигуры на следующий ход.
         /// </summary>
         /// <param name="position">Текущая позиция.</param>
         /// <param name="obstacles">Препятствия на доске.</param>
@@ -167,43 +169,43 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
             {
                 while (dir.Count > 0)
                 {
-                    for (int i = 0; i < dir.Count; i++)
-                    {
-                        Vector2Int move = Shift(position, dir[i], shift);
-
-                        if (!obstacles.Contains(move) && move.x >= 0 && move.x < 8 && move.y >= 0 && move.y < 8)
-                        {
-                            vectors.Add(move);
-                        }
-                        else
-                        {
-                            dir.RemoveAt(i);
-                            i--;
-                        }
-                    }
+                    AddMoves(in dir, in vectors, obstacles, position, shift);
 
                     shift++;
                 }
             }
             else
             {
-                for (int i = 0; i < dir.Count; i++)
-                {
-                    Vector2Int move = Shift(position, dir[i], shift);
-
-                    if (!obstacles.Contains(move) && move.x >= 0 && move.x < 8 && move.y >= 0 && move.y < 8)
-                    {
-                        vectors.Add(move);
-                    }
-                    else
-                    {
-                        dir.RemoveAt(i);
-                        i--;
-                    }
-                }
+                AddMoves(in dir, in vectors, obstacles, position, shift);
             }
             
             return vectors;
+        }
+
+        /// <summary>
+        /// Метод добавления возможных позиций.
+        /// </summary>
+        /// <param name="dir">Возможные направления перемещения.</param>
+        /// <param name="vectors">Список возможных позиций.</param>
+        /// <param name="obstacles">Препятствия на доске.</param>
+        /// <param name="position">Текущая позиция.</param>
+        /// <param name="shift">Смещение.</param>
+        private void AddMoves(in List<Vector2Int> dir, in List<Vector2Int> vectors, List<Vector2Int> obstacles, Vector2Int position, int shift)
+        {
+            for (int i = 0; i < dir.Count; i++)
+            {
+                Vector2Int move = Shift(position, dir[i], shift);
+
+                if (!obstacles.Contains(move) && move.x >= 0 && move.x < 8 && move.y >= 0 && move.y < 8)
+                {
+                    vectors.Add(move);
+                }
+                else
+                {
+                    dir.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         /// <summary>
