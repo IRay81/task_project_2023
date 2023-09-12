@@ -28,10 +28,15 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
                 throw new Exception();
             }
 
+            if (index < 0)
+            {
+                LoadModel(0);
+            }
+
             Dictionary<int, int[]> wordsPositionsPair = new();
             int numbersCount = 0;
 
-            MatchCollection wordsInLevelCollection = _wordInLevelRegex.Matches(_levels[index]);
+            MatchCollection wordsInLevelCollection = _wordInLevelRegex.Matches(_levels[index]); 
 
             string[] stringPair;
             string[] numbersString;
@@ -81,6 +86,8 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
         {
             TextAsset asset = Resources.Load<TextAsset>("Fillwords/words_list");
 
+            Regex regex = new Regex(@"\s+");
+
             if (asset == null)
             {
                 throw new Exception();
@@ -88,7 +95,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             else
             {
                 string allWords = asset.text;
-                _words = allWords.Split('\n');
+                _words = regex.Split(allWords);
 
                 asset = Resources.Load<TextAsset>("Fillwords/pack_0");
 
@@ -99,7 +106,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
                 else
                 {
                     string allLevels = asset.text;
-                    _levels = allLevels.Split('\n');
+                    _levels = allLevels.Split("\n");
                 }
             }
         }
