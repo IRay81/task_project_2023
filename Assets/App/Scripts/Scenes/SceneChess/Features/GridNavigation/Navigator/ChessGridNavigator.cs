@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.GridMatrix;
 using App.Scripts.Scenes.SceneChess.Features.ChessField.Types;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
 {
