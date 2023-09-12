@@ -109,12 +109,12 @@ namespace App.Scripts.Scenes.SceneChess.Features.GridNavigation.Navigator
         }
 
         /// <summary>
-        /// Смещение на +1 в сторону направления движения (для ферзя, ладьи и слона).
+        /// Смещение в сторону направления движения (для ферзя, ладьи и слона).
         /// </summary>
         /// <param name="position">Начальная позиция.</param>
         /// <param name="move">Направление движения.</param>
         /// <param name="shift">Смещение.</param>
-        /// <returns></returns>
+        /// <returns>Конечная позиция.</returns>
         private Vector2Int Shift(Vector2Int position, Vector2Int move, int shift)
         {
             return position + shift * move;

@@ -33,12 +33,16 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
 
             MatchCollection wordsInLevelCollection = _wordInLevelRegex.Matches(_levels[index]);
 
+            string[] stringPair;
+            string[] numbersString;
+            int[] numbersInt;
+
             foreach (Match match in wordsInLevelCollection)
             {
-                string[] stringPair = match.Value.Split(" ");
-                string[] numbersString = stringPair[1].Split(";");
+                stringPair = match.Value.Split(" ");
+                numbersString = stringPair[1].Split(";");
 
-                int[] numbersInt = new int[numbersString.Length];
+                numbersInt = new int[numbersString.Length];
 
                 for (int i = 0; i < numbersInt.Length; i++)
                 {
@@ -103,7 +107,6 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
         /// <summary>
         /// Проверка уровня на валидность.
         /// </summary>
-        /// <param name="totalNumbers">Все индексы слов.</param>
         /// <param name="wordsPositionsPair">Dictionary, где key - номер слова в словаре, а value - массив с индексами позиций букв в матрице.</param>
         /// <returns></returns>
         private bool LevelCheck(Dictionary<int, int[]> wordsPositionsPair)
