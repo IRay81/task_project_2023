@@ -39,8 +39,8 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
 
             foreach (Match match in wordsInLevelCollection)
             {
-                stringPair = match.Value.Split(" ");
-                numbersString = stringPair[1].Split(";");
+                stringPair = match.Value.Split(' ');
+                numbersString = stringPair[1].Split(';');
 
                 numbersInt = new int[numbersString.Length];
 
@@ -88,7 +88,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
             else
             {
                 string allWords = asset.text;
-                _words = allWords.Split(Environment.NewLine);
+                _words = allWords.Split('\n');
 
                 asset = Resources.Load<TextAsset>("Fillwords/pack_0");
 
@@ -99,7 +99,7 @@ namespace App.Scripts.Scenes.SceneFillwords.Features.ProviderLevel
                 else
                 {
                     string allLevels = asset.text;
-                    _levels = allLevels.Split(Environment.NewLine);
+                    _levels = allLevels.Split('\n');
                 }
             }
         }

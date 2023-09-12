@@ -12,7 +12,6 @@ namespace App.Scripts.Scenes.SceneWordSearch.Features.Level.BuilderLevelModel.Pr
             if (jsonLevelFile)
             {
                 return JsonUtility.FromJson<LevelInfo>(jsonLevelFile.text);
-
             }
             else
             {
